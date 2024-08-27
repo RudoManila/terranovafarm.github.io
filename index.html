@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario de la Granja SL</title>
+</head>
+<body>
+    <h1>Inventario de la Granja SL</h1>
+    <table border="1">
+        <tr>
+            <th>Objeto</th>
+            <th>Cantidad</th>
+        </tr>
+        <?php
+        // Leer el archivo de inventario
+        $archivo_inventario = 'inventario.txt';
+
+        if (file_exists($archivo_inventario)) {
+            $lineas = file($archivo_inventario, FILE_IGNORE_NEW_LINES);
+
+            foreach($lineas as $linea) {
+                list($nombre, $cantidad) = explode(",", $linea);
+                echo "<tr><td>" . htmlspecialchars($nombre) . "</td><td>" . htmlspecialchars($cantidad) . "</td></tr>";
+            }
+        } else {
+            echo "<tr><td colspan='2'>No hay datos de inventario disponibles.</td></tr>";
+        }
+        ?>
+    </table>
+</body>
+</html>
